@@ -1,0 +1,29 @@
+{
+  "name": "rick-and-morty",
+  "projectType": "application",
+  "sourceRoot": "apps/rick-and-morty/src",
+  "targets": {
+    "storybook": {
+      "executor": "@nx/storybook:storybook",
+      "options": {
+        "configDir": "apps/rick-and-morty/.storybook",
+        "browserTarget": "rick-and-morty:build"
+      }
+    },
+    "build": {
+      "executor": "@nx/web:build",
+      "options": {
+        "outputPath": "dist/apps/rick-and-morty",
+        "index": "apps/rick-and-morty/src/index.html",
+        "main": "apps/rick-and-morty/src/main.tsx",
+        "polyfills": "apps/rick-and-morty/src/polyfills.ts",
+        "tsConfig": "apps/rick-and-morty/tsconfig.app.json",
+        "assets": [
+          "apps/rick-and-morty/src/favicon.ico",
+          "apps/rick-and-morty/src/assets"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

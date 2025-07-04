@@ -1,0 +1,8 @@
+{
+  "name": "@org/rick-and-morty",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "name": "rick-and-morty"
+  }
+}
