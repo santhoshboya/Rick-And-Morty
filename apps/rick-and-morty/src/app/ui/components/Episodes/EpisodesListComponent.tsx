@@ -8,6 +8,7 @@ interface EpisodesListComponentProps {
   error?: string | null;
   hasMore: boolean;
   onLoadMore: () => void;
+  onEpisodeClick: (episode: SingleEpisodeProps) => void;
 }
 
 export const EpisodesListComponent: React.FC<EpisodesListComponentProps> = ({
@@ -16,6 +17,7 @@ export const EpisodesListComponent: React.FC<EpisodesListComponentProps> = ({
   error,
   hasMore,
   onLoadMore,
+  onEpisodeClick,
 }) => {
   const observer = useRef<IntersectionObserver | null>(null);
   const lastEpisodeRef = useCallback(
@@ -40,11 +42,11 @@ export const EpisodesListComponent: React.FC<EpisodesListComponentProps> = ({
           if (idx === episodes.length - 1) {
             return (
               <div ref={lastEpisodeRef} key={ep.episode}>
-                <SingleEpisode {...ep} />
+                <SingleEpisode {...ep} onClick={onEpisodeClick} />
               </div>
             );
           }
-          return <SingleEpisode key={ep.episode} {...ep} />;
+          return <SingleEpisode key={ep.episode} {...ep} onClick={onEpisodeClick} />;
         })}
         {loading && <div className={styles.loading}>Loading...</div>}
         {error && <div className={styles.error}>{error}</div>}

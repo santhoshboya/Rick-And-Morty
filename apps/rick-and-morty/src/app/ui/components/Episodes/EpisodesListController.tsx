@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useGetEpisodes } from "../../../data-access/apis/GetEpisodes/useGetEpisodes";
 import { EpisodesListComponent } from "./EpisodesListComponent";
 import { EpisodeModel } from "../../../data-access/store/episodes/EpisodeModel";
+import { EpisodeDetailsComponent } from "../EpisodeDetailsComponent/EpisodeDetailsComponent";
 
 import { useEpisodesStore } from '../../../data-access/StoreProvider/EpisodesContext';
 
@@ -34,17 +35,37 @@ export const EpisodesListController: React.FC = observer(() => {
     }
   }, [episodesStore.episodesLoading, episodesStore.episodeInfo]);
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedEpisode, setSelectedEpisode] = useState<EpisodeModel | null>(null);
+
+  const handleEpisodeClick = (episode: { name: string; episode: string; created: string }) => {
+    // Find the full episode model from the store for future data needs
+    const fullEpisode = episodesStore.episodes.find(
+      (ep) => ep.episode === episode.episode && ep.name === episode.name
+    );
+    setSelectedEpisode(fullEpisode || null);
+    setModalOpen(true);
+  };
+
   return (
-    <EpisodesListComponent
-      episodes={episodesStore.episodes.map((ep) => ({
-        name: ep.name,
-        episode: ep.episode,
-        created: ep.created,
-      }))}
-      loading={episodesStore.episodesLoading}
-      error={episodesStore.episodedError}
-      hasMore={!!(episodesStore.episodeInfo && episodesStore.episodeInfo.next)}
-      onLoadMore={handleLoadMore}
-    />
+    <>
+      <EpisodesListComponent
+        episodes={episodesStore.episodes.map((ep) => ({
+          name: ep.name,
+          episode: ep.episode,
+          created: ep.created,
+        }))}
+        loading={episodesStore.episodesLoading}
+        error={episodesStore.episodedError}
+        hasMore={!!(episodesStore.episodeInfo && episodesStore.episodeInfo.next)}
+        onLoadMore={handleLoadMore}
+        onEpisodeClick={handleEpisodeClick}
+      />
+      <EpisodeDetailsComponent
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        episode={selectedEpisode}
+      />
+    </>
   );
 });
