@@ -33,19 +33,22 @@ export const EpisodesListComponent: React.FC<EpisodesListComponentProps> = ({
   );
 
   return (
-    <div className={styles.listContainer}>
-      {episodes.map((ep, idx) => {
-        if (idx === episodes.length - 1) {
-          return (
-            <div ref={lastEpisodeRef} key={ep.episode}>
-              <SingleEpisode {...ep} />
-            </div>
-          );
-        }
-        return <SingleEpisode key={ep.episode} {...ep} />;
-      })}
-      {loading && <div className={styles.loading}>Loading...</div>}
-      {error && <div className={styles.error}>{error}</div>}
+    <div className={styles.container}>
+      <h2 className={styles.heading}>Rick and Morty Episodes</h2>
+      <div className={styles.listContainer}>
+        {episodes.map((ep, idx) => {
+          if (idx === episodes.length - 1) {
+            return (
+              <div ref={lastEpisodeRef} key={ep.episode}>
+                <SingleEpisode {...ep} />
+              </div>
+            );
+          }
+          return <SingleEpisode key={ep.episode} {...ep} />;
+        })}
+        {loading && <div className={styles.loading}>Loading...</div>}
+        {error && <div className={styles.error}>{error}</div>}
+      </div>
     </div>
   );
 };

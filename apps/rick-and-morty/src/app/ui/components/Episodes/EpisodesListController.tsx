@@ -2,13 +2,12 @@ import React, { useEffect, useState, useCallback } from "react";
 import { observer } from "mobx-react-lite";
 import { useGetEpisodes } from "../../../data-access/apis/GetEpisodes/useGetEpisodes";
 import { EpisodesListComponent } from "./EpisodesListComponent";
-import { EpisodesStore } from "../../../data-access/store/episodes/EpisodesStore";
 import { EpisodeModel } from "../../../data-access/store/episodes/EpisodeModel";
 
-// Instantiate the store (in real apps, provide via context or DI)
-const episodesStore = new EpisodesStore();
+import { useEpisodesStore } from '../../../data-access/StoreProvider/EpisodesContext';
 
 export const EpisodesListController: React.FC = observer(() => {
+  const episodesStore = useEpisodesStore();
   const [page, setPage] = useState(1);
   const { data, loading, error } = useGetEpisodes(page);
 

@@ -15,8 +15,8 @@ export function App() {
   return (
     <ApolloProvider client={client}>
       <EpisodesProvider>
-        {/* <NxWelcome title="rick-and-morty" />*/}
-        <EpisodesListController />
+          {/* <NxWelcome title="rick-and-morty" />*/}
+          <EpisodesListController />
       </EpisodesProvider>
     </ApolloProvider>
   );
