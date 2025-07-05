@@ -6,11 +6,11 @@ export const styles = {
   closeButton:
     "absolute top-2 right-3 text-2xl text-white hover:text-gray-400 focus:outline-none",
   tabsRow:
-    "flex mb-4 border-b border-gray-700",
+    "flex bg-neutral-900 rounded-full p-1 mb-6 shadow-md w-fit mx-auto",
   tab:
-    "flex-1 py-2 text-center text-gray-400 hover:text-white cursor-pointer transition-colors duration-200",
+    "flex-1 px-6 py-2 rounded-full text-sm font-medium text-gray-300 transition-all duration-200 focus:outline-none hover:text-white hover:bg-neutral-800/50",
   tabActive:
-    "flex-1 py-2 text-center text-white border-b-2 border-blue-500 font-semibold cursor-pointer",
+    "flex-1 px-6 py-2 rounded-full text-sm font-semibold text-white bg-neutral-800 shadow-md transition-all duration-200 focus:outline-none",
   tabContent:
     "mt-4 min-h-[100px] text-gray-200",
   tabTitle:
