@@ -23,6 +23,11 @@ export function App() {
           <CharacterDetailsProvider>
             <Routes>
               <Route path="/" element={<EpisodesListController />} />
+              <Route path="/episodes">
+                <Route index element={<EpisodesListController />} />
+                <Route path=":id" element={<EpisodesListController />} />
+                <Route path=":id/:tabId" element={<EpisodesListController />} />
+              </Route>
               <Route path="/character/:id" element={<CharacterDetailsController />} />
             </Routes>
           </CharacterDetailsProvider>

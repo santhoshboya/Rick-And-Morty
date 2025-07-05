@@ -6,16 +6,46 @@ import { EpisodeInfoComponent } from "./EpisodeInfoComponent";
 import { EpisodeCharactersComponent } from "./EpisodeCharactersComponent";
 import { Character } from "../../../data-access/apis/GetEpisodeDetails/useGetEpisodeDetails";
 
+type TabId = 'info' | 'characters';
+
 interface EpisodeDetailsComponentProps {
   open: boolean;
   onClose: () => void;
-  episode?: any; // Accepts episode data, can be typed better later
+  episode?: {
+    id: string;
+    name: string;
+    episode: string;
+    created: string;
+    air_date: string;
+    characters?: Character[];
+  } | null;
   loading: boolean;
   error?: string | null;
   characters: Character[];
+  tabId?: TabId;
+  onTabChange?: (tabId: TabId) => void;
 }
 
-export const EpisodeDetailsComponent: React.FC<EpisodeDetailsComponentProps> = ({ open, onClose, episode, loading, error, characters }) => {
+export const EpisodeDetailsComponent: React.FC<EpisodeDetailsComponentProps> = ({ open, onClose, episode, loading, error, characters, tabId = 'info', onTabChange }) => {
+  // Map tabId to tab index
+  const tabIndexMap = React.useMemo(() => ({ info: 0, characters: 1 } as Record<TabId, number>), []);
+  const tabKeys: TabId[] = ['info', 'characters'];
+  const initialIndex = tabIndexMap[tabId] ?? 0;
+  const [selectedIndex, setSelectedIndex] = React.useState(initialIndex);
+
+  // Sync selectedIndex with tabId prop
+  React.useEffect(() => {
+    setSelectedIndex(tabIndexMap[tabId] ?? 0);
+  }, [tabId, tabIndexMap]);
+
+  // When tab changes, call onTabChange with new tabId
+  const handleTabChange = (index: number) => {
+    setSelectedIndex(index);
+    if (onTabChange) {
+      onTabChange(tabKeys[index]);
+    }
+  };
+
   return (
     <Dialog open={open} onClose={onClose} className={styles.modalOverlay}>
       <DialogPanel className={styles.modalContainer}>
@@ -25,7 +55,7 @@ export const EpisodeDetailsComponent: React.FC<EpisodeDetailsComponentProps> = (
           ) : error ? (
             <div className={styles.error}>Error: {error}</div>
           ) : (
-            <TabGroup>
+            <TabGroup selectedIndex={selectedIndex} onChange={handleTabChange}>
               <TabList className={styles.tabsRow}>
                 <Tab className={({ selected }) => selected ? styles.tabActive : styles.tab}>
                   Info
@@ -37,11 +67,11 @@ export const EpisodeDetailsComponent: React.FC<EpisodeDetailsComponentProps> = (
               <TabPanels className={styles.tabContent}>
                 <TabPanel>
                   <h2 className={styles.tabTitle}>Episode Info: {episode?.episode} - {episode?.name}</h2>
-                  <EpisodeInfoComponent episode={episode} />
+                  <EpisodeInfoComponent episode={episode ?? undefined} />
                 </TabPanel>
                 <TabPanel className={styles.tabPanel}>
                   <h2 className={styles.tabTitle}>Characters: {episode?.episode} - {episode?.name}</h2>
-                  <EpisodeCharactersComponent characters={characters} />
+                  <EpisodeCharactersComponent characters={characters ?? []} />
                 </TabPanel>
               </TabPanels>
             </TabGroup>

@@ -8,9 +8,12 @@ interface EpisodeDetailsControllerProps {
   open: boolean;
   onClose: () => void;
   episodeId?: string | null;
+  tabId?: string;
+  onTabChange?: (tabId: string) => void;
+  onInvalidEpisode?: () => void;
 }
 
-export const EpisodeDetailsController: React.FC<EpisodeDetailsControllerProps> = observer(({ open, onClose, episodeId }) => {
+export const EpisodeDetailsController: React.FC<EpisodeDetailsControllerProps> = observer(({ open, onClose, episodeId, tabId, onTabChange, onInvalidEpisode }) => {
   const store = useEpisodeDetailsStore();
   const { data, loading, error } = useGetEpisodeDetails(episodeId || "");
 
@@ -27,6 +30,13 @@ export const EpisodeDetailsController: React.FC<EpisodeDetailsControllerProps> =
     }
   }, [data, loading, error, episodeId, store]);
 
+  // Redirect on invalid episode id
+  useEffect(() => {
+    if (!loading && error && typeof onInvalidEpisode === 'function') {
+      onInvalidEpisode();
+    }
+  }, [loading, error, onInvalidEpisode]);
+
   return (
     <EpisodeDetailsComponent
       open={open}
@@ -35,6 +45,8 @@ export const EpisodeDetailsController: React.FC<EpisodeDetailsControllerProps> =
       loading={store.loading}
       error={store.error}
       characters={store.characters}
+      tabId={tabId as 'info' | 'characters'}
+      onTabChange={onTabChange}
     />
   );
 });
