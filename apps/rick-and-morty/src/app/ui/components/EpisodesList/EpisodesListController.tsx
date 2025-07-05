@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useGetEpisodes } from "../../../data-access/apis/GetEpisodes/useGetEpisodes";
 import { EpisodesListComponent } from "./EpisodesListComponent";
 import { EpisodeModel } from "../../../data-access/store/episodes/EpisodeModel";
-import { EpisodeDetailsController } from "../EpisodeDetailsComponent/EpisodeDetailsController";
+import { EpisodeDetailsController } from "../../controllers/EpisodeDetailsController/EpisodeDetailsController";
 
 import { useEpisodesStore } from '../../../data-access/StoreProvider/EpisodesContext';
 import { useNavigate, useParams } from 'react-router-dom';

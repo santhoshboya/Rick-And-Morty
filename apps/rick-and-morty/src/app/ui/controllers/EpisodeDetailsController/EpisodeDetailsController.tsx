@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useGetEpisodeDetails } from "../../../data-access/apis/GetEpisodeDetails/useGetEpisodeDetails";
 import { useEpisodeDetailsStore } from "../../../data-access/StoreProvider/EpisodeDetailsContext";
-import { EpisodeDetailsComponent } from "./EpisodeDetailsComponent";
+import { EpisodeDetailsComponent } from "../../components/EpisodeDetailsComponent/EpisodeDetailsComponent";
 
 interface EpisodeDetailsControllerProps {
   open: boolean;

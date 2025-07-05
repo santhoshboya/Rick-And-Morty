@@ -1,12 +1,11 @@
-import NxWelcome from './nx-welcome';
-import { EpisodesListController } from './ui/components/Episodes/EpisodesListController';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { EpisodesProvider } from './data-access/StoreProvider/EpisodesContext';
 import { RICK_AND_MORTY_GRAPHQL_ENDPOINT } from './data-access/constants/apiconsts';
 import { EpisodeDetailsProvider } from './data-access/StoreProvider/EpisodeDetailsContext';
 import { CharacterDetailsProvider } from './data-access/StoreProvider/CharacterDetailsContext';
+import CharacterDetailsController from './ui/controllers/CharacterDetailsController/CharacterDetailsController';
 import { Routes, Route } from 'react-router-dom';
-import CharacterDetailsController from './ui/Controllers/GetCharacterDetails/CharacterDetailsController';
+import { EpisodesListController } from './ui/components/EpisodesList/EpisodesListController';
 
 const client = new ApolloClient({
   uri: RICK_AND_MORTY_GRAPHQL_ENDPOINT,
