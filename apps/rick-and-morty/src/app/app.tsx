@@ -3,6 +3,7 @@ import { EpisodesListController } from './ui/components/Episodes/EpisodesListCon
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { EpisodesProvider } from './data-access/StoreProvider/EpisodesContext';
 import { RICK_AND_MORTY_GRAPHQL_ENDPOINT } from './data-access/constants/apiconsts';
+import { EpisodeDetailsProvider } from './data-access/StoreProvider/EpisodeDetailsContext';
 
 const client = new ApolloClient({
   uri: RICK_AND_MORTY_GRAPHQL_ENDPOINT,
@@ -14,8 +15,10 @@ export function App() {
   return (
     <ApolloProvider client={client}>
       <EpisodesProvider>
+        <EpisodeDetailsProvider>
           {/* <NxWelcome title="rick-and-morty" />*/}
           <EpisodesListController />
+        </EpisodeDetailsProvider>
       </EpisodesProvider>
     </ApolloProvider>
   );
