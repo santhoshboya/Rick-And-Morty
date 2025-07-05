@@ -1,0 +1,19 @@
+// Styles.tsx
+export const styles = {
+  container: "min-h-screen w-full bg-gradient-to-b from-black via-neutral-900 to-neutral-950 flex flex-col items-center justify-start py-12",
+  card: "relative w-full max-w-3xl flex flex-col md:flex-row gap-8 p-8 bg-neutral-900 bg-opacity-95 rounded-xl shadow-2xl border border-neutral-800 mx-auto",
+  image: "w-40 h-40 md:w-48 md:h-48 rounded-lg object-cover shadow-lg border-4 border-pink-500 self-center md:self-start bg-neutral-950 mb-4 md:mb-0",
+  infoSection: "flex-1 flex flex-col gap-3 text-white",
+  name: "text-3xl md:text-4xl font-extrabold mb-2 tracking-tight text-white drop-shadow-lg",
+  detail: "text-base md:text-lg text-neutral-300",
+  label: "font-bold text-pink-500 mr-1",
+  section: "mt-4",
+  sectionTitle: "text-xl md:text-2xl font-bold mb-2 text-pink-500",
+  episodeList: "list-disc pl-6",
+  episodeItem: "text-neutral-300 hover:text-pink-400 transition-colors",
+  episodeCode: "text-xs text-neutral-400 ml-2",
+  loading: "fixed inset-0 flex items-center justify-center bg-black/90 text-2xl text-pink-500 z-50",
+  error: "fixed inset-0 flex items-center justify-center bg-black/90 text-2xl text-yellow-400 z-50",
+  backButton: "fixed top-6 left-6 flex items-center gap-2 px-4 py-2 bg-black hover:bg-neutral-800 text-white font-bold rounded-full shadow-lg transition-all cursor-pointer z-50 border border-white/20",
+  backIcon: "w-5 h-5 text-white",
+};
