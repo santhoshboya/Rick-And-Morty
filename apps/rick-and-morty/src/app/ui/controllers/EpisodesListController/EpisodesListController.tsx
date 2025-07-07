@@ -10,7 +10,7 @@ import { TAB_KEYS, TabId } from '../../constants/Constants';
 import { EpisodeDetailsController } from "../EpisodeDetailsController/EpisodeDetailsController";
 import { EpisodesListComponent } from "../../components/EpisodesList/EpisodesListComponent";
 
-export const EpisodesListController: React.FC = observer(() => {
+const EpisodesListController: React.FC = observer(() => {
   const episodesStore = useEpisodesStore();
   const [page, setPage] = useState(1);
   const [getEpisodes, { data, loading, error }] = useGetEpisodes();
@@ -95,3 +95,5 @@ export const EpisodesListController: React.FC = observer(() => {
     </>
   );
 });
+
+export default EpisodesListController;
