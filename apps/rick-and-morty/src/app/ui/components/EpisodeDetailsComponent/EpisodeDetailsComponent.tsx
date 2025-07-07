@@ -5,6 +5,7 @@ import { styles } from "./Style";
 import { EpisodeInfoComponent } from "./EpisodeInfoComponent";
 import { EpisodeCharactersComponent } from "./EpisodeCharactersComponent";
 import { Character } from "../../../data-access/apis/GetEpisodeDetails/useGetEpisodeDetails";
+import { useTranslation } from 'react-i18next';
 
 type TabId = 'info' | 'characters';
 
@@ -27,6 +28,7 @@ interface EpisodeDetailsComponentProps {
 }
 
 export const EpisodeDetailsComponent: React.FC<EpisodeDetailsComponentProps> = ({ open, onClose, episode, loading, error, characters, tabId = 'info', onTabChange }) => {
+  const { t } = useTranslation();
   // Map tabId to tab index
   const tabIndexMap = React.useMemo(() => ({ info: 0, characters: 1 } as Record<TabId, number>), []);
   const tabKeys: TabId[] = ['info', 'characters'];
@@ -51,26 +53,26 @@ export const EpisodeDetailsComponent: React.FC<EpisodeDetailsComponentProps> = (
       <DialogPanel className={styles.modalContainer}>
         <button className={styles.closeButton} onClick={onClose}>&times;</button>
           {loading ? (
-            <div className={styles.loading}>Loading episode details...</div>
+            <div className={styles.loading}>{t('common.loading')} EpisodeDetails</div>
           ) : error ? (
-            <div className={styles.error}>Error: {error}</div>
+            <div className={styles.error}>{t('episodeDetails.errorPrefix')} {error}</div>
           ) : (
             <TabGroup selectedIndex={selectedIndex} onChange={handleTabChange}>
               <TabList className={styles.tabsRow}>
                 <Tab className={({ selected }) => selected ? styles.tabActive : styles.tab}>
-                  Info
+                  {t('episodeDetails.tabs.info')}
                 </Tab>
                 <Tab className={({ selected }) => selected ? styles.tabActive : styles.tab}>
-                  Characters
+                  {t('episodeDetails.tabs.characters')}
                 </Tab>
               </TabList>
               <TabPanels className={styles.tabContent}>
                 <TabPanel>
-                  <h2 className={styles.tabTitle}>Episode Info: {episode?.episode} - {episode?.name}</h2>
+                  <h2 className={styles.tabTitle}>{t('episodeDetails.episodeInfo', { code: episode?.episode, name: episode?.name })}</h2>
                   <EpisodeInfoComponent episode={episode ?? undefined} />
                 </TabPanel>
                 <TabPanel className={styles.tabPanel}>
-                  <h2 className={styles.tabTitle}>Characters: {episode?.episode} - {episode?.name}</h2>
+                  <h2 className={styles.tabTitle}>{t('episodeDetails.charactersInfo', { code: episode?.episode, name: episode?.name })}</h2>
                   <EpisodeCharactersComponent characters={characters ?? []} />
                 </TabPanel>
               </TabPanels>

@@ -1,4 +1,5 @@
 import React, { useRef, useCallback } from "react";
+import { useTranslation } from 'react-i18next';
 import { SingleEpisode, SingleEpisodeProps } from "./SingleEpisode";
 import { styles } from "./Styles";
 
@@ -34,9 +35,10 @@ export const EpisodesListComponent: React.FC<EpisodesListComponentProps> = ({
     [loading, hasMore, onLoadMore]
   );
 
+  const { t } = useTranslation();
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Rick and Morty Episodes</h2>
+      <h2 className={styles.heading}>{t('episodes.title')}</h2>
       <div className={styles.listContainer}>
         {episodes.map((ep, idx) => {
           if (idx === episodes.length - 1) {
@@ -48,7 +50,7 @@ export const EpisodesListComponent: React.FC<EpisodesListComponentProps> = ({
           }
           return <SingleEpisode key={ep.episode} {...ep} onClick={onEpisodeClick} />;
         })}
-        {loading && <div className={styles.loading}>Loading...</div>}
+        {loading && <div className={styles.loading}>{t('common.loading')}</div>}
         {error && <div className={styles.error}>{error}</div>}
       </div>
     </div>

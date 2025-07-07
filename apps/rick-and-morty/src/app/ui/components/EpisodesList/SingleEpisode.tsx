@@ -1,5 +1,6 @@
 import React from "react";
 import { styles } from "./Styles";
+import { useTranslation } from 'react-i18next';
 
 export interface SingleEpisodeProps {
   name: string;
@@ -9,6 +10,7 @@ export interface SingleEpisodeProps {
 }
 
 export const SingleEpisode: React.FC<SingleEpisodeProps> = ({ name, episode, created, onClick }) => {
+  const { t } = useTranslation();
   return (
     <div className={styles.episodeCard} onClick={(event) => onClick?.({ name, episode, created })} style={{ cursor: 'pointer' }}>
       <div className={styles.headerRow}>
@@ -16,7 +18,7 @@ export const SingleEpisode: React.FC<SingleEpisodeProps> = ({ name, episode, cre
         <span className={styles.episodeName}>{name}</span>
       </div>
       <div className={styles.createdDate}>
-        Created: {new Date(created).toLocaleDateString()}
+        {t('episodes.created')}{new Date(created).toLocaleDateString()}
       </div>
     </div>
   );

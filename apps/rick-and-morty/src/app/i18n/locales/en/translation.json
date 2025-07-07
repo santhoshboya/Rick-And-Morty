@@ -1,0 +1,34 @@
+{
+  "common": {
+    "loading": "Loading..."
+  },
+  "episodes": {
+    "title": "Rick and Morty Episodes",
+    "created": "Created: "
+  },
+  "characterDetails": {
+    "back": "Back",
+    "status": "Status:",
+    "species": "Species:",
+    "gender": "Gender:",
+    "origin": "Origin",
+    "name": "Name:",
+    "code": "Code:",
+    "airDate": "Air Date:",
+    "id": "ID:",
+    "noCharacters": "No characters found for this episode.",
+    "location": "Location",
+    "episodes": "Episodes"
+  },
+  "episodeDetails": {
+    "tabs": {
+      "info": "Info",
+      "characters": "Characters"
+    },
+    "error": "An error occurred",
+    "loadingEpisodeDetails": "Loading episode details...",
+    "errorPrefix": "Error:",
+    "episodeInfo": "Episode Info: {{code}} - {{name}}",
+    "charactersInfo": "Characters: {{code}} - {{name}}"
+  }
+}

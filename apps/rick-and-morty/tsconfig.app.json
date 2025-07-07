@@ -31,5 +31,8 @@
     "**/*.stories.jsx",
     "**/*.stories.tsx"
   ],
-  "include": ["src/**/*", "../../libs/rick-and-morty/**/*"]
+  "include": [
+    "src",
+    "src/**/*.json"
+  ]
 }

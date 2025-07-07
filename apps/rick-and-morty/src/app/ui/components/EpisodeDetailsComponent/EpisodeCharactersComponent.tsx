@@ -1,5 +1,6 @@
 import React from "react";
 import { styles } from "./EpisodeCharactersComponentStyles";
+import { useTranslation } from 'react-i18next';
 import { Character } from "../../../data-access/apis/GetEpisodeDetails/useGetEpisodeDetails";
 import { CharacterComponent } from "./CharacterComponent";
 
@@ -8,7 +9,8 @@ interface EpisodeCharactersComponentProps {
 }
 
 export const EpisodeCharactersComponent: React.FC<EpisodeCharactersComponentProps> = ({ characters }) => {
-  if (!characters || characters.length === 0) return <div className={styles.empty}>No characters found for this episode.</div>;
+  const { t } = useTranslation();
+  if (!characters || characters.length === 0) return <div className={styles.empty}>{t('characterDetails.noCharacters')}</div>;
   return (
     <div className={styles.charactersList}>
       {characters.map((character) => (

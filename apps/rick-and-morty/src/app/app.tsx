@@ -1,3 +1,4 @@
+import './i18n/i18n';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { EpisodesProvider } from './data-access/StoreProvider/EpisodesContext';
 import { RICK_AND_MORTY_GRAPHQL_ENDPOINT } from './data-access/constants/apiconsts';

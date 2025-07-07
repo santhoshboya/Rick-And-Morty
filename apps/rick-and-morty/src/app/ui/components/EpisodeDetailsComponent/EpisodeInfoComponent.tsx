@@ -1,5 +1,6 @@
 import React from "react";
 import { styles } from "./EpisodeInfoComponentStyles";
+import { useTranslation } from 'react-i18next';
 
 interface EpisodeInfoComponentProps {
   episode?: {
@@ -12,14 +13,15 @@ interface EpisodeInfoComponentProps {
 }
 
 export const EpisodeInfoComponent: React.FC<EpisodeInfoComponentProps> = ({ episode }) => {
+  const { t } = useTranslation();
   if (!episode) return null;
   return (
     <div className={styles.infoContainer}>
-      <div className={styles.row}><span className={styles.label}>Name:</span> {episode.name}</div>
-      <div className={styles.row}><span className={styles.label}>Code:</span> {episode.episode}</div>
-      <div className={styles.row}><span className={styles.label}>Air Date:</span> {episode.air_date}</div>
-      <div className={styles.row}><span className={styles.label}>Created:</span> {episode.created}</div>
-      <div className={styles.row}><span className={styles.label}>ID:</span> {episode.id}</div>
+      <div className={styles.row}><span className={styles.label}>{t('characterDetails.name')}</span> {episode.name}</div>
+      <div className={styles.row}><span className={styles.label}>{t('characterDetails.code')}</span> {episode.episode}</div>
+      <div className={styles.row}><span className={styles.label}>{t('characterDetails.airDate')}</span> {episode.air_date}</div>
+      <div className={styles.row}><span className={styles.label}>{t('episodes.created')}</span> {episode.created}</div>
+      <div className={styles.row}><span className={styles.label}>{t('characterDetails.id')}</span> {episode.id}</div>
     </div>
   );
 };
