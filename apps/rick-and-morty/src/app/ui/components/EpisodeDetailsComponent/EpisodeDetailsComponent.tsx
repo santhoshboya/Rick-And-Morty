@@ -2,12 +2,12 @@ import React from "react";
 import { useTranslation } from 'react-i18next';
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import { styles } from "./Style";
-import { EpisodeInfoComponent } from "./EpisodeInfoComponent";
-import { EpisodeCharactersComponent } from "./EpisodeCharactersComponent";
-import { Character } from "../../../data-access/apis/GetEpisodeDetails/useGetEpisodeDetails";
 
-type TabId = 'info' | 'characters';
+import { styles } from "./Styles";
+import { EpisodeInfoComponent } from "../EpisodeInfoComponent/EpisodeInfoComponent";
+import { EpisodeCharactersComponent } from "../EpisodeCharactersComponent/EpisodeCharactersComponent";
+import { Character } from "../../../data-access/stores/EpisodeDetailsStore";
+import { TAB_KEYS, TAB_INDEX_MAP, TabId } from "../../constants/constants";
 
 interface EpisodeDetailsComponentProps {
   open: boolean;
@@ -29,19 +29,17 @@ interface EpisodeDetailsComponentProps {
 
 export const EpisodeDetailsComponent: React.FC<EpisodeDetailsComponentProps> = ({ open, onClose, episode, loading, error, characters, tabId = 'info', onTabChange }) => {
   const { t } = useTranslation();
-  const tabIndexMap = React.useMemo(() => ({ info: 0, characters: 1 } as Record<TabId, number>), []);
-  const tabKeys: TabId[] = ['info', 'characters'];
-  const initialIndex = tabIndexMap[tabId] ?? 0;
+  const initialIndex = TAB_INDEX_MAP[tabId] ?? 0;
   const [selectedIndex, setSelectedIndex] = React.useState(initialIndex);
 
   React.useEffect(() => {
-    setSelectedIndex(tabIndexMap[tabId] ?? 0);
-  }, [tabId, tabIndexMap]);
+    setSelectedIndex(TAB_INDEX_MAP[tabId] ?? 0);
+  }, [tabId]);
 
   const handleTabChange = (index: number) => {
     setSelectedIndex(index);
     if (onTabChange) {
-      onTabChange(tabKeys[index]);
+      onTabChange(TAB_KEYS[index]);
     }
   };
 

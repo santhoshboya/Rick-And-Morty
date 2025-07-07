@@ -2,13 +2,12 @@ import React from "react";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
 
-import { styles } from "./CharacterComponentStyles";
-import { Character } from "../../../data-access/apis/GetEpisodeDetails/useGetEpisodeDetails";
+import { styles } from "./Styles";
+import { Character } from "../../../data-access/stores/EpisodeDetailsStore";
 
 interface CharacterComponentProps {
   character: Character;
 }
-
 
 export const CharacterComponent: React.FC<CharacterComponentProps> = ({ character }) => {
   const navigate = useNavigate();

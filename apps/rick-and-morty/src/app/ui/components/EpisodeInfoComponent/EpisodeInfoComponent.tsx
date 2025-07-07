@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from 'react-i18next';
 
-import { styles } from "./EpisodeInfoComponentStyles";
+import { styles } from "./Styles";
 
 interface EpisodeInfoComponentProps {
   episode?: {
