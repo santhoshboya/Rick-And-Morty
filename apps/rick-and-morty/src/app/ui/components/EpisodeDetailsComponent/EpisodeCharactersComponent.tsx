@@ -1,6 +1,7 @@
 import React from "react";
-import { styles } from "./EpisodeCharactersComponentStyles";
 import { useTranslation } from 'react-i18next';
+
+import { styles } from "./EpisodeCharactersComponentStyles";
 import { Character } from "../../../data-access/apis/GetEpisodeDetails/useGetEpisodeDetails";
 import { CharacterComponent } from "./CharacterComponent";
 

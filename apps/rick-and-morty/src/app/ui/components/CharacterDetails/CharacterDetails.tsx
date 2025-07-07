@@ -1,9 +1,9 @@
-// CharacterDetails.tsx
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { CharacterDetails as CharacterDetailsType } from "../../../data-access/stores/GetCharacterDetails/GetCharacterDetailsStore";
-import { styles } from './Styles';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
+import { styles } from './Styles';
+import { CharacterDetails as CharacterDetailsType } from "../../../data-access/stores/GetCharacterDetails/GetCharacterDetailsStore";
 
 interface Props {
   data: CharacterDetailsType | null;

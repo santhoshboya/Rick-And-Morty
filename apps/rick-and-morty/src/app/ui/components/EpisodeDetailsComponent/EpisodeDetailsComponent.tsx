@@ -1,11 +1,11 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { styles } from "./Style";
 import { EpisodeInfoComponent } from "./EpisodeInfoComponent";
 import { EpisodeCharactersComponent } from "./EpisodeCharactersComponent";
 import { Character } from "../../../data-access/apis/GetEpisodeDetails/useGetEpisodeDetails";
-import { useTranslation } from 'react-i18next';
 
 type TabId = 'info' | 'characters';
 
@@ -29,18 +29,15 @@ interface EpisodeDetailsComponentProps {
 
 export const EpisodeDetailsComponent: React.FC<EpisodeDetailsComponentProps> = ({ open, onClose, episode, loading, error, characters, tabId = 'info', onTabChange }) => {
   const { t } = useTranslation();
-  // Map tabId to tab index
   const tabIndexMap = React.useMemo(() => ({ info: 0, characters: 1 } as Record<TabId, number>), []);
   const tabKeys: TabId[] = ['info', 'characters'];
   const initialIndex = tabIndexMap[tabId] ?? 0;
   const [selectedIndex, setSelectedIndex] = React.useState(initialIndex);
 
-  // Sync selectedIndex with tabId prop
   React.useEffect(() => {
     setSelectedIndex(tabIndexMap[tabId] ?? 0);
   }, [tabId, tabIndexMap]);
 
-  // When tab changes, call onTabChange with new tabId
   const handleTabChange = (index: number) => {
     setSelectedIndex(index);
     if (onTabChange) {

@@ -1,8 +1,9 @@
 import React from "react";
-import { styles } from "./CharacterComponentStyles";
 import { useTranslation } from 'react-i18next';
-import { Character } from "../../../data-access/apis/GetEpisodeDetails/useGetEpisodeDetails";
 import { useNavigate } from "react-router-dom";
+
+import { styles } from "./CharacterComponentStyles";
+import { Character } from "../../../data-access/apis/GetEpisodeDetails/useGetEpisodeDetails";
 
 interface CharacterComponentProps {
   character: Character;

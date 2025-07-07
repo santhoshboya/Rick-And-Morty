@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { observer } from "mobx-react-lite";
+import { useNavigate, useParams } from 'react-router-dom';
+
 import { useGetEpisodes } from "../../../data-access/apis/GetEpisodes/useGetEpisodes";
+import { useEpisodesStore } from '../../../data-access/StoreProvider/EpisodesContext';
 import { EpisodesListComponent } from "./EpisodesListComponent";
 import { EpisodeModel } from "../../../data-access/store/episodes/EpisodeModel";
 import { EpisodeDetailsController } from "../../controllers/EpisodeDetailsController/EpisodeDetailsController";
-
-import { useEpisodesStore } from '../../../data-access/StoreProvider/EpisodesContext';
-import { useNavigate, useParams } from 'react-router-dom';
 
 export const EpisodesListController: React.FC = observer(() => {
   const episodesStore = useEpisodesStore();

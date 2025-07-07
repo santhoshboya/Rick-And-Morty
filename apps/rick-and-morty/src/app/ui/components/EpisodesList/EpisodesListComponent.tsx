@@ -1,7 +1,8 @@
 import React, { useRef, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
-import { SingleEpisode, SingleEpisodeProps } from "./SingleEpisode";
+
 import { styles } from "./Styles";
+import { SingleEpisode, SingleEpisodeProps } from "./SingleEpisode";
 
 interface EpisodesListComponentProps {
   episodes: SingleEpisodeProps[];

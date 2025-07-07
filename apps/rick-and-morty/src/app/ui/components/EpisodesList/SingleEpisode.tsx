@@ -1,6 +1,7 @@
 import React from "react";
-import { styles } from "./Styles";
 import { useTranslation } from 'react-i18next';
+
+import { styles } from "./Styles";
 
 export interface SingleEpisodeProps {
   name: string;
@@ -12,7 +13,7 @@ export interface SingleEpisodeProps {
 export const SingleEpisode: React.FC<SingleEpisodeProps> = ({ name, episode, created, onClick }) => {
   const { t } = useTranslation();
   return (
-    <div className={styles.episodeCard} onClick={(event) => onClick?.({ name, episode, created })} style={{ cursor: 'pointer' }}>
+    <div className={styles.episodeCard} onClick={() => onClick?.({ name, episode, created })} tabIndex={0} role="button" onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClick?.({ name, episode, created }); }}>
       <div className={styles.headerRow}>
         <span className={styles.episodeEnum}>{episode}</span>
         <span className={styles.episodeName}>{name}</span>
