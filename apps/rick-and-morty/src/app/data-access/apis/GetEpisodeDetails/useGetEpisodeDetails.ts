@@ -1,6 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
 
-// Types for query variables and response
 export type EpisodeDetailsQueryVars = {
   episodeId: string;
 };
@@ -45,7 +44,6 @@ export const GetEpisodeDetailsDocument = gql`
   }
 `;
 
-// Apollo hook to fetch episode details by ID
 export function useGetEpisodeDetails(episodeId: string) {
   return useQuery<EpisodeDetailsQueryData, EpisodeDetailsQueryVars>(GetEpisodeDetailsDocument, {
     variables: { episodeId },

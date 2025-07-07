@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
+
 import { useGetCharacterDetails } from '../../../data-access/apis/GetCharacterDetails/GetCharacterDetailsApi';
 import { useCharacterDetailsStore } from '../../../data-access/StoreProvider/CharacterDetailsContext';
 import CharacterDetails from '../../components/CharacterDetails/CharacterDetails';

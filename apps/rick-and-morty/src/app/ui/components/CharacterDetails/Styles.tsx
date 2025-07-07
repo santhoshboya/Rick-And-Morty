@@ -1,4 +1,3 @@
-// Styles.tsx
 export const styles = {
   container: "min-h-screen w-full bg-gradient-to-b from-black via-neutral-900 to-neutral-950 flex flex-col items-center justify-start py-12",
   card: "relative w-full max-w-3xl flex flex-col md:flex-row gap-8 p-8 bg-neutral-900 bg-opacity-95 rounded-xl shadow-2xl border border-neutral-800 mx-auto",

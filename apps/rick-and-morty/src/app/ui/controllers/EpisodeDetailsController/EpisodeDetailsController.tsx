@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
+
 import { useGetEpisodeDetails } from "../../../data-access/apis/GetEpisodeDetails/useGetEpisodeDetails";
 import { useEpisodeDetailsStore } from "../../../data-access/StoreProvider/EpisodeDetailsContext";
 import { EpisodeDetailsComponent } from "../../components/EpisodeDetailsComponent/EpisodeDetailsComponent";
@@ -17,7 +18,6 @@ export const EpisodeDetailsController: React.FC<EpisodeDetailsControllerProps> =
   const store = useEpisodeDetailsStore();
   const { data, loading, error } = useGetEpisodeDetails(episodeId || "");
 
-  // Sync store with query state
   useEffect(() => {
     store.setLoading(loading);
     store.setError(error?.message || null);
@@ -30,7 +30,6 @@ export const EpisodeDetailsController: React.FC<EpisodeDetailsControllerProps> =
     }
   }, [data, loading, error, episodeId, store]);
 
-  // Redirect on invalid episode id
   useEffect(() => {
     if (!loading && error && typeof onInvalidEpisode === 'function') {
       onInvalidEpisode();

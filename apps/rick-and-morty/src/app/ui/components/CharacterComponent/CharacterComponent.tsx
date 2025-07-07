@@ -2,8 +2,8 @@ import React from "react";
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
 
-import { styles } from "./Styles";
 import { Character } from "../../../data-access/stores/EpisodeDetailsStore";
+import { styles } from "./Styles";
 
 interface CharacterComponentProps {
   character: Character;

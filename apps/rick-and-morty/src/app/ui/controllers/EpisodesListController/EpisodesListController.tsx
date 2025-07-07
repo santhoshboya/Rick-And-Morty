@@ -4,9 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useGetEpisodes } from "../../../data-access/apis/GetEpisodes/useGetEpisodes";
 import { useEpisodesStore } from '../../../data-access/StoreProvider/EpisodesContext';
+import { EpisodesListComponent } from "../../components/EpisodesList/EpisodesListComponent";
 import { EpisodeModel } from "../../../data-access/store/episodes/EpisodeModel";
-import { EpisodeDetailsController } from "../../controllers/EpisodeDetailsController/EpisodeDetailsController";
-import { EpisodesListComponent } from "./EpisodesListComponent";
 
 export const EpisodesListController: React.FC = observer(() => {
   const episodesStore = useEpisodesStore();
@@ -18,11 +17,8 @@ export const EpisodesListController: React.FC = observer(() => {
   const episodeIdFromUrl = params.id || null;
   const tabIdFromUrl = params.tabId || 'info'; // default to 'info' tab
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedEpisodeId, setSelectedEpisodeId] = useState<string | null>(null);
   const [activeTabId, setActiveTabId] = useState<string>(tabIdFromUrl);
 
-  // When data changes, update store
   useEffect(() => {
     if (data && data.episodes) {
       if (page === 1) {
@@ -45,21 +41,13 @@ export const EpisodesListController: React.FC = observer(() => {
     }
   }, [episodesStore.episodesLoading, episodesStore.episodeInfo]);
 
-  // Modal state sync with URL
   React.useEffect(() => {
     if (episodeIdFromUrl) {
-      setSelectedEpisodeId(episodeIdFromUrl);
-      setModalOpen(true);
       setActiveTabId(tabIdFromUrl);
-    } else {
-      setModalOpen(false);
-      setSelectedEpisodeId(null);
-      setActiveTabId('info');
     }
   }, [episodeIdFromUrl, tabIdFromUrl]);
 
   const handleEpisodeClick = (episode: { name: string; episode: string; created: string }) => {
-    // Find the full episode model from the store for future data needs
     const fullEpisode = episodesStore.episodes.find(
       (ep) => ep.episode === episode.episode && ep.name === episode.name
     );
@@ -68,46 +56,14 @@ export const EpisodesListController: React.FC = observer(() => {
     }
   };
 
-  // When tab changes in modal, update URL
-  const handleTabChange = (tabId: string) => {
-    setActiveTabId(tabId);
-    if (selectedEpisodeId) {
-      navigate(`/episodes/${selectedEpisodeId}/${tabId}`);
-    }
-  };
-
-
-  const handleModalClose = () => {
-    navigate('/episodes');
-  };
-
-  // Handler to redirect to episodes list on invalid id (to be passed to EpisodeDetailsController)
-  const handleInvalidEpisode = React.useCallback(() => {
-    navigate('/episodes', { replace: true });
-  }, [navigate]);
-
   return (
-    <>
-      <EpisodesListComponent
-        episodes={episodesStore.episodes.map((ep) => ({
-          name: ep.name,
-          episode: ep.episode,
-          created: ep.created,
-        }))}
-        loading={episodesStore.episodesLoading}
-        error={episodesStore.episodedError}
-        hasMore={!!(episodesStore.episodeInfo && episodesStore.episodeInfo.next)}
-        onLoadMore={handleLoadMore}
-        onEpisodeClick={handleEpisodeClick}
-      />
-      <EpisodeDetailsController
-        open={modalOpen}
-        onClose={handleModalClose}
-        episodeId={selectedEpisodeId}
-        tabId={activeTabId}
-        onTabChange={handleTabChange}
-        onInvalidEpisode={handleInvalidEpisode}
-      />
-    </>
+    <EpisodesListComponent
+      episodes={episodesStore.episodes}
+      loading={episodesStore.episodesLoading}
+      error={episodesStore.episodedError}
+      onLoadMore={handleLoadMore}
+      onEpisodeClick={handleEpisodeClick}
+      hasMore={episodesStore.episodeInfo?.next !== null}
+    />
   );
 });

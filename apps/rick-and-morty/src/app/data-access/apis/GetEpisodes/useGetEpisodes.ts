@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { DocumentNode } from "graphql";
-// Types for query variables and response
+
 type EpisodesQueryVars = {
   page?: number;
 };
@@ -47,17 +47,8 @@ const GetEpisodesDocument = gql`
 }
 `;
 
-/**
- * Apollo hook to fetch episodes using the Rick and Morty GraphQL API.
- * Uses endpoint from constants.
- * @param page Page number for pagination
- */
 export function useGetEpisodes(page?: number) {
-  // Apollo Client's useQuery will use the endpoint from the ApolloProvider at the app root.
-  // This hook assumes the ApolloProvider is configured with RICK_AND_MORTY_GRAPHQL_ENDPOINT.
   return useQuery<EpisodesQueryData, EpisodesQueryVars>(GetEpisodesDocument as DocumentNode, {
     variables: { page },
-    // No need to specify context.uri if the ApolloProvider is set up globally.
-    // If needed, you can add context: { uri: RICK_AND_MORTY_GRAPHQL_ENDPOINT }
   });
 }

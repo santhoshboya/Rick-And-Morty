@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
-import { styles } from "./Styles";
-import { EpisodeInfoComponent } from "../EpisodeInfoComponent/EpisodeInfoComponent";
-import { EpisodeCharactersComponent } from "../EpisodeCharactersComponent/EpisodeCharactersComponent";
 import { Character } from "../../../data-access/stores/EpisodeDetailsStore";
 import { TAB_KEYS, TAB_INDEX_MAP, TabId } from "../../constants/constants";
+import { EpisodeCharactersComponent } from "../EpisodeCharactersComponent/EpisodeCharactersComponent";
+import { EpisodeInfoComponent } from "../EpisodeInfoComponent/EpisodeInfoComponent";
+import { styles } from "./Styles";
 
 interface EpisodeDetailsComponentProps {
   open: boolean;

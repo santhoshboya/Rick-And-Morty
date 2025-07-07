@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation } from 'react-i18next';
 
-import { styles } from "./Styles";
 import { Character } from "../../../data-access/stores/EpisodeDetailsStore";
 import { CharacterComponent } from "../CharacterComponent/CharacterComponent";
+import { styles } from "./Styles";
 
 interface EpisodeCharactersComponentProps {
   characters: Character[];

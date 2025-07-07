@@ -2,7 +2,7 @@ import React, { useRef, useCallback } from "react";
 import { useTranslation } from 'react-i18next';
 
 import { styles } from "./Styles";
-import { SingleEpisode, SingleEpisodeProps } from "./SingleEpisode";
+import { SingleEpisode, SingleEpisodeProps } from "../SingleEpisode/SingleEpisode";
 
 interface EpisodesListComponentProps {
   episodes: SingleEpisodeProps[];
