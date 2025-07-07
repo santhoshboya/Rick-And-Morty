@@ -4,20 +4,25 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useGetEpisodes } from "../../../data-access/apis/GetEpisodes/GetEpisodes";
 import { useEpisodesStore } from '../../../data-access/StoreProvider/EpisodesContext';
-import { EpisodesListComponent } from "../../components/EpisodesList/EpisodesListComponent";
 import { EpisodeModel } from "../../../data-access/models/EpisodeModel/EpisodeModel";
+import { TAB_KEYS, TabId } from '../../constants/constants';
+import { EpisodeDetailsController } from "../EpisodeDetailsController/EpisodeDetailsController";
+import { EpisodesListComponent } from "../../components/EpisodesList/EpisodesListComponent";
 
 export const EpisodesListController: React.FC = observer(() => {
   const episodesStore = useEpisodesStore();
   const [page, setPage] = useState(1);
-  const { data, loading, error } = useGetEpisodes(page);
+  const [getEpisodes, { data, loading, error }] = useGetEpisodes();
+
+  useEffect(() => {
+    getEpisodes({ variables: { page } });
+  }, [getEpisodes, page]);
 
   const navigate = useNavigate();
   const params = useParams();
-  const episodeIdFromUrl = params.id || null;
-  const tabIdFromUrl = params.tabId || 'info'; // default to 'info' tab
-
-  const [activeTabId, setActiveTabId] = useState<string>(tabIdFromUrl);
+  const selectedEpisodeId = params.id || null;
+  const activeTabId: TabId = (params.tabId as TabId) || TAB_KEYS[0];
+  const modalOpen = Boolean(selectedEpisodeId);
 
   useEffect(() => {
     if (data && data.episodes) {
@@ -33,7 +38,7 @@ export const EpisodesListController: React.FC = observer(() => {
 
   const handleLoadMore = useCallback(() => {
     if (
-      !episodesStore.episodesLoading &&
+      episodesStore.episodesLoading === false &&
       episodesStore.episodeInfo &&
       episodesStore.episodeInfo.next
     ) {
@@ -41,29 +46,51 @@ export const EpisodesListController: React.FC = observer(() => {
     }
   }, [episodesStore.episodesLoading, episodesStore.episodeInfo]);
 
-  React.useEffect(() => {
-    if (episodeIdFromUrl) {
-      setActiveTabId(tabIdFromUrl);
-    }
-  }, [episodeIdFromUrl, tabIdFromUrl]);
-
   const handleEpisodeClick = (episode: { name: string; episode: string; created: string }) => {
     const fullEpisode = episodesStore.episodes.find(
-      (ep: EpisodeModel) => ep.episode === episode.episode && ep.name === episode.name
+      (ep) => ep.episode === episode.episode && ep.name === episode.name
     );
     if (fullEpisode?.id) {
       navigate(`/episodes/${fullEpisode.id}/${activeTabId}`);
     }
   };
 
+  const handleTabChange = (tabId: string) => {
+    if (selectedEpisodeId) {
+      navigate(`/episodes/${selectedEpisodeId}/${tabId}`);
+    }
+  };
+
+  const handleModalClose = () => {
+    navigate('/episodes');
+  };
+
+  const handleInvalidEpisode = useCallback(() => {
+    navigate('/episodes', { replace: true });
+  }, [navigate]);
+
   return (
-    <EpisodesListComponent
-      episodes={episodesStore.episodes}
-      loading={episodesStore.episodesLoading}
-      error={episodesStore.episodedError}
-      onLoadMore={handleLoadMore}
-      onEpisodeClick={handleEpisodeClick}
-      hasMore={episodesStore.episodeInfo?.next !== null}
-    />
+    <>
+      <EpisodesListComponent
+        episodes={episodesStore.episodes.map((ep) => ({
+          name: ep.name,
+          episode: ep.episode,
+          created: ep.created,
+        }))}
+        loading={episodesStore.episodesLoading}
+        error={episodesStore.episodedError}
+        hasMore={(episodesStore.episodeInfo && episodesStore.episodeInfo.next) ? true : false}
+        onLoadMore={handleLoadMore}
+        onEpisodeClick={handleEpisodeClick}
+      />
+      <EpisodeDetailsController
+        open={modalOpen}
+        onClose={handleModalClose}
+        episodeId={selectedEpisodeId}
+        tabId={activeTabId}
+        onTabChange={handleTabChange}
+        onInvalidEpisode={handleInvalidEpisode}
+      />
+    </>
   );
 });

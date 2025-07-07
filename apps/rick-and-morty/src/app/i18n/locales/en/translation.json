@@ -29,6 +29,7 @@
     "loadingEpisodeDetails": "Loading episode details...",
     "errorPrefix": "Error:",
     "episodeInfo": "Episode Info: {{code}} - {{name}}",
-    "charactersInfo": "Characters: {{code}} - {{name}}"
+    "charactersInfo": "Characters: {{code}} - {{name}}",
+    "title": "Episode Details"
   }
 }

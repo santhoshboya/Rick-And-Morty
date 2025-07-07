@@ -4,14 +4,15 @@ import { observer } from "mobx-react-lite";
 import { useGetEpisodeDetails } from "../../../data-access/apis/GetEpisodeDetails/GetEpisodeDetails";
 import { useEpisodeDetailsStore } from "../../../data-access/StoreProvider/EpisodeDetailsContext";
 import { EpisodeDetailsComponent } from "../../components/EpisodeDetailsComponent/EpisodeDetailsComponent";
+import { TabId } from "../../constants/constants";
 
 interface EpisodeDetailsControllerProps {
   open: boolean;
   onClose: () => void;
   episodeId?: string | null;
-  tabId?: string;
-  onTabChange?: (tabId: string) => void;
-  onInvalidEpisode?: () => void;
+  tabId: TabId;
+  onTabChange: (tabId: TabId) => void;
+  onInvalidEpisode: () => void;
 }
 
 export const EpisodeDetailsController: React.FC<EpisodeDetailsControllerProps> = observer(({ open, onClose, episodeId, tabId, onTabChange, onInvalidEpisode }) => {
@@ -22,16 +23,22 @@ export const EpisodeDetailsController: React.FC<EpisodeDetailsControllerProps> =
     store.setLoading(loading);
     store.setError(error?.message || null);
     if (data?.episode) {
-      store.setEpisodeDetails(data.episode);
+      store.setEpisodeDetails({
+        id: data.episode.id,
+        name: data.episode.name,
+        episode: data.episode.episode,
+        created: data.episode.created,
+        airDate: data.episode.air_date,
+      });
       store.setCharacters(data.episode.characters);
     }
-    if (!episodeId) {
+    if (episodeId === null) {
       store.clearDetails();
     }
   }, [data, loading, error, episodeId, store]);
 
   useEffect(() => {
-    if (!loading && error && typeof onInvalidEpisode === 'function') {
+    if (loading === false && error && onInvalidEpisode) {
       onInvalidEpisode();
     }
   }, [loading, error, onInvalidEpisode]);
@@ -44,7 +51,7 @@ export const EpisodeDetailsController: React.FC<EpisodeDetailsControllerProps> =
       loading={store.loading}
       error={store.error}
       characters={store.characters}
-      tabId={tabId as 'info' | 'characters'}
+      tabId={tabId}
       onTabChange={onTabChange}
     />
   );

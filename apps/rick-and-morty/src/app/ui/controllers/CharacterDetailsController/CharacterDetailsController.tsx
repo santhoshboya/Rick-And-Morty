@@ -21,7 +21,6 @@ const CharacterDetailsController: React.FC = observer(() => {
     if (error) {
       characterDetailsStore.setError(error.message || 'Failed to fetch character details');
     }
-    // Cleanup on unmount
     return () => characterDetailsStore.clearDetails();
   }, [id, data, error, loading, characterDetailsStore]);
 

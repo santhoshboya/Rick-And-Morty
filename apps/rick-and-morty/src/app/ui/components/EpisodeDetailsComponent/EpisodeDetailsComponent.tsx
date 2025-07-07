@@ -17,7 +17,7 @@ interface EpisodeDetailsComponentProps {
     name: string;
     episode: string;
     created: string;
-    air_date: string;
+    airDate: string;
     characters?: Character[];
   } | null;
   loading: boolean;
@@ -48,7 +48,7 @@ export const EpisodeDetailsComponent: React.FC<EpisodeDetailsComponentProps> = (
       <DialogPanel className={styles.modalContainer}>
         <button className={styles.closeButton} onClick={onClose}>&times;</button>
           {loading ? (
-            <div className={styles.loading}>{t('common.loading')} EpisodeDetails</div>
+            <div className={styles.loading}>{t('common.loading')} {t('episodeDetails.title')}</div>
           ) : error ? (
             <div className={styles.error}>{t('episodeDetails.errorPrefix')} {error}</div>
           ) : (

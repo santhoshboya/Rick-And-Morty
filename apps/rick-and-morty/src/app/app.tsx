@@ -6,7 +6,7 @@ import { EpisodeDetailsProvider } from './data-access/StoreProvider/EpisodeDetai
 import { CharacterDetailsProvider } from './data-access/StoreProvider/CharacterDetailsContext';
 import CharacterDetailsController from './ui/controllers/CharacterDetailsController/CharacterDetailsController';
 import { Routes, Route } from 'react-router-dom';
-import { EpisodesListController } from './ui/components/EpisodesList/EpisodesListController';
+import { EpisodesListController } from './ui/controllers/EpisodesListController/EpisodesListController';
 
 const client = new ApolloClient({
   uri: RICK_AND_MORTY_GRAPHQL_ENDPOINT,

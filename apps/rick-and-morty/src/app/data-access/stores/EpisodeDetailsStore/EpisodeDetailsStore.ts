@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 export interface Character {
   id: string;
@@ -13,7 +13,7 @@ export interface EpisodeDetails {
   name: string;
   episode: string;
   created: string;
-  air_date: string;
+  airDate: string;
 }
 
 export class EpisodeDetailsStore {

@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useLazyQuery } from '@apollo/client';
 import { DocumentNode } from "graphql";
 
 type EpisodesQueryVars = {
@@ -47,8 +47,6 @@ const GetEpisodesDocument = gql`
 }
 `;
 
-export function useGetEpisodes(page?: number) {
-  return useQuery<EpisodesQueryData, EpisodesQueryVars>(GetEpisodesDocument as DocumentNode, {
-    variables: { page },
-  });
+export function useGetEpisodes() {
+  return useLazyQuery<EpisodesQueryData, EpisodesQueryVars>(GetEpisodesDocument as DocumentNode);
 }
