@@ -11,6 +11,7 @@ const CharacterDetailsController: React.FC = observer(() => {
   const { id } = useParams<{ id: string }>();
   const { data, loading, error } = useGetCharacterDetails(id || '');
 
+  
   useEffect(() => {
     if (!id) return;
     characterDetailsStore.setCharacterId(id);
@@ -22,7 +23,8 @@ const CharacterDetailsController: React.FC = observer(() => {
       characterDetailsStore.setError(error.message || 'Failed to fetch character details');
     }
     return () => characterDetailsStore.clearDetails();
-  }, [id, data, error, loading, characterDetailsStore]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, data, error, loading]);
 
   return (
     <CharacterDetails
