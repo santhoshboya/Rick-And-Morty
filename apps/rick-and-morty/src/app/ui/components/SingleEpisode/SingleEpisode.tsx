@@ -5,8 +5,8 @@ import { styles } from "./Styles";
 
 export interface SingleEpisodeProps {
   name: string;
-  episode: string; // e.g., S05E08
-  created: string; // ISO string
+  episode: string;
+  created: string;
   onClick?: (episode: SingleEpisodeProps) => void;
 }
 

@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useGetEpisodeDetails } from "../../../data-access/apis/GetEpisodeDetails/GetEpisodeDetails";
 import { useEpisodeDetailsStore } from "../../../data-access/StoreProvider/EpisodeDetailsContext";
 import { EpisodeDetailsComponent } from "../../components/EpisodeDetailsComponent/EpisodeDetailsComponent";
-import { TabId } from "../../constants/constants";
+import { TabId } from "../../constants/Constants";
 
 interface EpisodeDetailsControllerProps {
   open: boolean;

@@ -1,6 +1,7 @@
 import './i18n/i18n';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { EpisodesProvider } from './data-access/StoreProvider/EpisodesContext';
+import { ROUTE_EPISODES, ROUTE_CHARACTER_DETAILS } from './ui/constants/RoutePaths';
 import { RICK_AND_MORTY_GRAPHQL_ENDPOINT } from './data-access/constants/ApiConsts';
 import { EpisodeDetailsProvider } from './data-access/StoreProvider/EpisodeDetailsContext';
 import { CharacterDetailsProvider } from './data-access/StoreProvider/CharacterDetailsContext';
@@ -23,12 +24,12 @@ export function App() {
           <CharacterDetailsProvider>
             <Routes>
               <Route path="/" element={<EpisodesListController />} />
-              <Route path="/episodes">
+              <Route path={ROUTE_EPISODES}>
                 <Route index element={<EpisodesListController />} />
                 <Route path=":id" element={<EpisodesListController />} />
                 <Route path=":id/:tabId" element={<EpisodesListController />} />
               </Route>
-              <Route path="/character/:id" element={<CharacterDetailsController />} />
+              <Route path={ROUTE_CHARACTER_DETAILS(':id')} element={<CharacterDetailsController />} />
             </Routes>
           </CharacterDetailsProvider>
         </EpisodeDetailsProvider>

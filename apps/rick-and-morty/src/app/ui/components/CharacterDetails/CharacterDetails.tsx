@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import { CharacterDetails as CharacterDetailsType } from "../../../data-access/stores/CharacterDetailsStore/CharacterDetailsStore";
+import { ROUTE_EPISODE_DETAILS } from '../../constants/RoutePaths';
 import { styles } from './Styles';
 
 interface CharacterDetailsProps {
@@ -46,8 +47,15 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({ data, loading, erro
       <h3 className={styles.sectionTitle}>{t('characterDetails.episodes')}</h3>
       <ul className={styles.episodeList}>
         {data?.episode.map((ep) => (
-          <li key={ep.id} className={styles.episodeItem}>
-            {ep.name} <span className={styles.episodeCode}>({ep.episode})</span>
+          <li key={ep.id}>
+            <button
+              type="button"
+              className={styles.episodeItem}
+              onClick={() => navigate(ROUTE_EPISODE_DETAILS(ep.id))}
+              aria-label={`Go to details for episode ${ep.name}`}
+            >
+              {ep.name} <span className={styles.episodeCode}>({ep.episode})</span>
+            </button>
           </li>
         ))}
       </ul>

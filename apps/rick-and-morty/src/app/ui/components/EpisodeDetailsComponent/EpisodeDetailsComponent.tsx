@@ -4,7 +4,7 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
 import { Character } from "../../../data-access/stores/EpisodeDetailsStore/EpisodeDetailsStore";
-import { TAB_KEYS, TAB_INDEX_MAP, TabId } from "../../constants/constants";
+import { TAB_KEYS, TAB_INDEX_MAP, TabId } from "../../constants/Constants";
 import { EpisodeCharactersComponent } from "../EpisodeCharactersComponent/EpisodeCharactersComponent";
 import { EpisodeInfoComponent } from "../EpisodeInfoComponent/EpisodeInfoComponent";
 import { styles } from "./Styles";

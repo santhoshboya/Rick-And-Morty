@@ -5,7 +5,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useGetEpisodes } from "../../../data-access/apis/GetEpisodes/GetEpisodes";
 import { useEpisodesStore } from '../../../data-access/StoreProvider/EpisodesContext';
 import { EpisodeModel } from "../../../data-access/models/EpisodeModel/EpisodeModel";
-import { TAB_KEYS, TabId } from '../../constants/constants';
+import { ROUTE_EPISODES, ROUTE_EPISODE_DETAILS_TAB } from '../../constants/RoutePaths';
+import { TAB_KEYS, TabId } from '../../constants/Constants';
 import { EpisodeDetailsController } from "../EpisodeDetailsController/EpisodeDetailsController";
 import { EpisodesListComponent } from "../../components/EpisodesList/EpisodesListComponent";
 
@@ -51,22 +52,22 @@ export const EpisodesListController: React.FC = observer(() => {
       (ep) => ep.episode === episode.episode && ep.name === episode.name
     );
     if (fullEpisode?.id) {
-      navigate(`/episodes/${fullEpisode.id}/${activeTabId}`);
+      navigate(ROUTE_EPISODE_DETAILS_TAB(fullEpisode.id, activeTabId));
     }
   };
 
   const handleTabChange = (tabId: string) => {
     if (selectedEpisodeId) {
-      navigate(`/episodes/${selectedEpisodeId}/${tabId}`);
+      navigate(ROUTE_EPISODE_DETAILS_TAB(selectedEpisodeId, tabId));
     }
   };
 
   const handleModalClose = () => {
-    navigate('/episodes');
+    navigate(ROUTE_EPISODES);
   };
 
   const handleInvalidEpisode = useCallback(() => {
-    navigate('/episodes', { replace: true });
+    navigate(ROUTE_EPISODES, { replace: true });
   }, [navigate]);
 
   return (
