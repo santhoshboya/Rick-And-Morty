@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import { EpisodeModel } from "./EpisodeModel";
-import { EpisodeInfoModel } from "./EpisodeInfoModel";
+import { EpisodeInfoModel } from "../../models/EpisodeInfoModel/EpisodeInfoModel";
+import { EpisodeModel } from "../../models/EpisodeModel/EpisodeModel";
 
 export class EpisodesStore {
   episodes: EpisodeModel[] = [];
@@ -37,13 +37,3 @@ export class EpisodesStore {
     this.episodedError = null;
   }
 }
-
-// Usage in a React component:
-// const store = new EpisodesStore();
-// const { data, loading, error } = useGetEpisodes(page);
-// useEffect(() => {
-//   if (data) store.appendEpisodes(data.episodes.results, data.episodes.info);
-//   store.setLoading(loading);
-//   store.setError(error?.message || null);
-// }, [data, loading, error]);
-

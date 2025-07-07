@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from 'react-i18next';
 
-import { Character } from "../../../data-access/stores/EpisodeDetailsStore";
+import { Character } from "../../../data-access/stores/EpisodeDetailsStore/EpisodeDetailsStore";
 import { CharacterComponent } from "../CharacterComponent/CharacterComponent";
 import { styles } from "./Styles";
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
-import { useGetEpisodeDetails } from "../../../data-access/apis/GetEpisodeDetails/useGetEpisodeDetails";
+import { useGetEpisodeDetails } from "../../../data-access/apis/GetEpisodeDetails/GetEpisodeDetails";
 import { useEpisodeDetailsStore } from "../../../data-access/StoreProvider/EpisodeDetailsContext";
 import { EpisodeDetailsComponent } from "../../components/EpisodeDetailsComponent/EpisodeDetailsComponent";
 

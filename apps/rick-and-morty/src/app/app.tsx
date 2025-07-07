@@ -1,7 +1,7 @@
 import './i18n/i18n';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { EpisodesProvider } from './data-access/StoreProvider/EpisodesContext';
-import { RICK_AND_MORTY_GRAPHQL_ENDPOINT } from './data-access/constants/apiconsts';
+import { RICK_AND_MORTY_GRAPHQL_ENDPOINT } from './data-access/constants/ApiConsts';
 import { EpisodeDetailsProvider } from './data-access/StoreProvider/EpisodeDetailsContext';
 import { CharacterDetailsProvider } from './data-access/StoreProvider/CharacterDetailsContext';
 import CharacterDetailsController from './ui/controllers/CharacterDetailsController/CharacterDetailsController';

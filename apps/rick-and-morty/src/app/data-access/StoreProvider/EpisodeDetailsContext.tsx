@@ -1,5 +1,5 @@
 import React, { createContext, useContext, ReactNode } from "react";
-import { EpisodeDetailsStore } from "../stores/EpisodeDetailsStore";
+import { EpisodeDetailsStore } from "../stores/EpisodeDetailsStore/EpisodeDetailsStore";
 
 const EpisodeDetailsContext = createContext<EpisodeDetailsStore | null>(null);
 

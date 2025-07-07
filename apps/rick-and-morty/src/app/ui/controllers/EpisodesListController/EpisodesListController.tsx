@@ -2,10 +2,10 @@ import React, { useEffect, useState, useCallback } from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useGetEpisodes } from "../../../data-access/apis/GetEpisodes/useGetEpisodes";
+import { useGetEpisodes } from "../../../data-access/apis/GetEpisodes/GetEpisodes";
 import { useEpisodesStore } from '../../../data-access/StoreProvider/EpisodesContext';
 import { EpisodesListComponent } from "../../components/EpisodesList/EpisodesListComponent";
-import { EpisodeModel } from "../../../data-access/store/episodes/EpisodeModel";
+import { EpisodeModel } from "../../../data-access/models/EpisodeModel/EpisodeModel";
 
 export const EpisodesListController: React.FC = observer(() => {
   const episodesStore = useEpisodesStore();
@@ -49,7 +49,7 @@ export const EpisodesListController: React.FC = observer(() => {
 
   const handleEpisodeClick = (episode: { name: string; episode: string; created: string }) => {
     const fullEpisode = episodesStore.episodes.find(
-      (ep) => ep.episode === episode.episode && ep.name === episode.name
+      (ep: EpisodeModel) => ep.episode === episode.episode && ep.name === episode.name
     );
     if (fullEpisode?.id) {
       navigate(`/episodes/${fullEpisode.id}/${activeTabId}`);

@@ -2,9 +2,9 @@ import React, { useEffect, useState, useCallback } from "react";
 import { observer } from "mobx-react-lite";
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useGetEpisodes } from "../../../data-access/apis/GetEpisodes/useGetEpisodes";
+import { useGetEpisodes } from "../../../data-access/apis/GetEpisodes/GetEpisodes";
 import { useEpisodesStore } from '../../../data-access/StoreProvider/EpisodesContext';
-import { EpisodeModel } from "../../../data-access/store/episodes/EpisodeModel";
+import { EpisodeModel } from "../../../data-access/models/EpisodeModel/EpisodeModel";
 import { EpisodeDetailsController } from "../../controllers/EpisodeDetailsController/EpisodeDetailsController";
 import { EpisodesListComponent } from "./EpisodesListComponent";
 

@@ -23,7 +23,7 @@ const CharacterDetailsController: React.FC = observer(() => {
     }
     // Cleanup on unmount
     return () => characterDetailsStore.clearDetails();
-  }, [id, data, error, loading]);
+  }, [id, data, error, loading, characterDetailsStore]);
 
   return (
     <CharacterDetails

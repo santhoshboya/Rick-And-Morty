@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
-import { CharacterDetails as CharacterDetailsType } from "../../../data-access/stores/GetCharacterDetails/GetCharacterDetailsStore";
+import { CharacterDetails as CharacterDetailsType } from "../../../data-access/stores/CharacterDetailsStore/CharacterDetailsStore";
 import { styles } from './Styles';
 
 interface CharacterDetailsProps {

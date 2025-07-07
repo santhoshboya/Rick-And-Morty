@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 
-import { Character } from "../../../data-access/stores/EpisodeDetailsStore";
+import { Character } from "../../../data-access/stores/EpisodeDetailsStore/EpisodeDetailsStore";
 import { TAB_KEYS, TAB_INDEX_MAP, TabId } from "../../constants/constants";
 import { EpisodeCharactersComponent } from "../EpisodeCharactersComponent/EpisodeCharactersComponent";
 import { EpisodeInfoComponent } from "../EpisodeInfoComponent/EpisodeInfoComponent";
